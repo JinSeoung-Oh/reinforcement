@@ -304,6 +304,3 @@ class GridEnv(object):
             transition_matrix[s,a,ns] = prob
       self._transition_matrix = transition_matrix
     return self._transition_matrix
-################################################################################################
-
-# plotting code
