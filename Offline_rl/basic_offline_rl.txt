@@ -1,1 +1,44 @@
+## Offline-policy RL
+
+Generally, reinforcement learning generate policy from experience which get from directly interaction between environment and agent. 
+when machine generate policy, if the soure of experience is environment then it called on-policy 
+If the source of experience is replay buffer that stores a set of data from environment, it called off-policy
+(It means, in the off-policy, there is no interaction with environement. So, off-policy need a large dataset)
+
+#############################################################################################
+Dataset D = {(s_i, a_i, s'_i, r_i) is given, and D is collected from behavior policy(pi_beta)
+* baseline : we do not know about behavior policy (unkown policy)
+Then
+s ~ d^(pi_beta)(s)
+a ~ (pi_beta)(a|s)
+s' ~ p(s'|s,a)
+r <-- r(s,a)
+
+purpose 
+
+max(pi) ∑ t=0 to T E_{s_(t~a^t*pi(s)), a_(t~pi(a|s))[	γ^(t)r(s_t, a_t)]}
+*pi : not behavior policy.
+##############################################################################################
+
+Why offline?
+1. Suppose we have a large dataset. And this dataset contain good action and bed action.
+   Within that dataset, we might be able to find a flow for good action. This will give better results than the random way
+
+2. In general, action that red good in one environment are likely to be good in another
+
+3. We can get optimal action from combination of partial action (Stitching)
+
+https://arxiv.org/abs/1806.10293
+
+#################################################################################################
+
+Why offline is hard?
+
+1. Limited feedback (about error)
+2. Overfitting (this dataset is turely large?)
+3. Distribution Shift
+
+#################################################################################################
+
+What is Distribution shift?
 
