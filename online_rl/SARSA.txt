@@ -1,0 +1,19 @@
+Initialize the action-value estimates Q(s,a) to some arbitrary values.
+
+1. Set the initial state s
+2. Choose the initial action a using an epsilon-greedy policy based on the current Q values
+3. Take the action A and observe the reward R and the next state s'
+4. Choose the next action A' using an epsilon-greedy policy based on the updated Q values
+5. Update the action-values estimate for the current state-action pair using the SARSA update rule:
+   Q(s, a) = Q(s, a) + alpha * (r + gamma * Q(s’, a’) – Q(s, a))
+
+where alpha is the learning rate, gamma is the discount factor, and r + gamma * (Qs',a') is the estimated return
+for the next state-action pair
+Set the current state S to the next state S', and the current action A to the next action A'
+
+Repeat steps 4-7 until the episode ends.
+
+The SARSA algorighm learns a policy that balances exploration and exploitation, and can be used in a variety of applications,
+including robotics, game playing, and decision making.
+Howevert, it is importatn to note that the convergence of the SARSA algorithm can be slow, 
+espeically in large state sapces, and there are other reinforcement learning algorithms that may be more effective in certain siuations
