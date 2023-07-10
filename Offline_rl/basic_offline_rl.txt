@@ -60,3 +60,16 @@ but this process is impossible in the offline setting
 
 Offline RL with policy gradient
 
+Generally, goal of RL is maximizing total expected reward. 
+Because of distribution shift, in offline setting, we use importance weight for importance sampling
+But, dis-advantage of importance sampling is high variance and if the total horizon gets longer, the importance weight
+quickly decreases to zero.
+To solve this problem, log-Derivative trick(or grad-log-pi) is used
+-https://talkingaboutme.tistory.com/entry/RL-Review-Offline-Reinforcement-Learning-From-Algorithms-to-Practical-Challenges
+
+#####################################################################################################
+
+Advantage of offline RL
+1. When looking for good behavior in data which mix good and bad behavior
+2. Generalization advantage under the assumption that good behavior in one domain is likely to perform well in other domains.
+3. A combination of good actions can find the optimal policy (Stitiching)
