@@ -42,3 +42,21 @@ Why offline is hard?
 
 What is Distribution shift?
 
+If overfitting did not occur, the expectation term of ERM(Empirical Risk Minimization) would have a small value.
+Of course, if it is well trained, the expectation term will becones small even when a new sample darwn from
+the same distribution is added. However, this value cannot be said to be small when samples are drawn from other distributions.
+Generally, neural netwrok is used for value network. If dataset is enough, then distribution is not matter
+But, in optimization process, it becomes matter
+
+##################################################################################################
+
+Sampling & function approximation error
+
+Usually, rather than describing the exact value function throught a dataset, an approximation is used for value function.
+Therefore, if there is incorrectly sampled data, in the policy can be improved by comparing it with the estimated value and reflecting it,
+but this process is impossible in the offline setting
+
+###################################################################################################
+
+Offline RL with policy gradient
+
