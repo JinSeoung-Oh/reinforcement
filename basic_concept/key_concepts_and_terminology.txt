@@ -1,0 +1,178 @@
+## Basic concept of RL
+The main characters of RL are the agent and the environment.
+THe environment is the world that the agen lives in and interact with
+The environment changes when the agent acts on it, but may also change on its own.
+
+The agent precives a reward signal from the environment
+The goal of the agent is to maximize its cumulative reward, called return
+
+
+## State and observation
+A state S is a complete description of the state of the world. There is no information about the world
+which is hidden from the state
+
+An observation O is a partial description of a state, which may omit information
+
+When the agent is able to observe the complete state of the environment, we called that the environemnt as fully observed
+When the agent can only see a parial observation, we called it partially observed
+
+
+## Action Spaces
+The set of all valid actions in a given environment is often called the action space
+
+
+## Discrete action spaces
+If the agent can move just a finite number of moves, this spaces called discrte action spaces(ex. Go, Atari)
+
+
+## Continuous action sapces
+where the agent controls like a robot in a physical world is called continuous action spaces, and action in that spaces are real-valued vectors
+
+
+## Policy
+A policy is a rule used by an agent to decide what actions to take. It can be deterministic, in which case it is usually
+denoted by mu:
+                a_y = mu(s_t)
+                
+or it may be stochastic, in which case it is usually denoted by pi:
+
+                                                                    a_t ~ pi(•|s_t)
+purpose : trying to maximize reward
+
+
+## Parameterized policies
+policies whose outputs are computable functions that depend on a set of parameters 
+(eg the weights and biases of a neural network) which we can adjust to change the behavior via some optimization algorithm.
+
+
+## Deterministic polices
+ex) simple deterministic plicy for a continuous action space
+
+pi_net = nn.Sequential(
+              nn.Linear(obs_dim, 64),
+              nn.Tanh(),
+              nn.Linear(64,64),
+              nn.Tanh(),
+              nn.Linear(64, act_dim)
+              )
+obs_tensor = torch.as_tensor(obs, dtype=torch.float32)
+actions = pi_net(obs_tensor)
+
+
+## Stochastic polices
+Two key computations are centrally important for using and training stochastic policies:
+1) sampling actions from the policy
+2) computing log likelihoods of particular action, log(pi_septa(a|s))
+
+Type
+1. categorical policy
+   Can be used in discrete action spaces
+2. Diagonal gaussian policy
+   Are used in continuous action spaces
+
+
+## Trajectories
+A trajectories \tau is a sequence of states and actions in the world
+ \tau = (s_0, a_0, s_1, a_1, ...)
+The very first state of the world, s_0, is randomly sampled fron the start-state distribution, somtiems denoted by
+\rho_0:
+        s_0 ~ \rho_0(•)
+
+state trasitions(what happens to the world between the state at time t, s_t, and the state at t+1, s_{t+1}), 
+are governed by the natural laws of the environment, and depend on only the most recent action,
+a_t. They can be either deterministic,
+
+                                      s_{t+1} = f(s_t, a_t)
+
+or stochastic,
+
+                                  s_{t+1} \sim P(\cdot|s_t, a_t).
+
+Actions come from an agent according to its policy.
+
+
+## Reward 
+The reward function R is critically important in reinforcement learning. 
+It depends on the current state of the world, the action just taken, and the next state of the world
+
+
+## Return
+Finite-horizon undiscounted return
+Which is just the sum of rewards obtained in a fixes window of steps
+
+infinite-horizon discounted return
+Which is the sun of all rewards ever obtained by the agent, but discounted by how far off in the future they're obtained
+This formulation of reward includes a discount factor  \gamma \in (0,1)
+
+
+## Value functions
+It’s often useful to know the value of a state, or state-action pair. 
+By value, we mean the expected return if you start in that state or state-action pair, 
+and then act according to a particular policy forever after. 
+Value functions are used, one way or another, in almost every RL algorithm.
+
+Type
+1. The on-policy value function
+    V^{\pi}(s), which gives the expected return if you start in state s and always act according to policy \pi
+    V^{\pi}(s) = \underE{\tau \sim \pi}{R(\tau)\left| s_0 = s\right.}
+
+2. The on_policy action-value function
+   Q^{\pi}(s,a), which gives the expected return if you start in sate S, take an arbitrary action A
+   (which may not have com from the policy), and then forever after act accoring to policy \pi
+   Q^{\pi}(s,a) = \underE{\tau \sim \pi}{R(\tau)\left| s_0 = s, a_0 = a\right.}
+
+3. The optimal value function 
+    V^*(s), which gives the expected return if you start in state s and always act according to the optimal policy in the environment
+    V^*(s) = \max_{\pi} \underE{\tau \sim \pi}{R(\tau)\left| s_0 = s\right.}
+
+4. The optimal action-value function
+   Q^*(s,a), which gives the expected return if you start in state s, take an arbitrary action a,
+   and then forever after act according to the optimal policy in the environment
+   Q^*(s,a) = \max_{\pi} \underE{\tau \sim \pi}{R(\tau)\left| s_0 = s, a_0 = a\right.}
+
+
+## The optimal Q-function and the optimal action
+There is an important connection between the optimal action-value function Q^*(s,a) and the action selected by the optimal policy. 
+By definition, Q^*(s,a) gives the expected return for starting in state s, taking (arbitrary) action a, 
+and then acting according to the optimal policy forever after.
+
+The optimal policy in s will select whichever action maximizes the expected return from starting in s. 
+As a result, if we have Q^*, we can directly obtain the optimal action, a^*(s), via
+
+a^*(s) = \arg \max_a Q^* (s,a).
+
+Note: there may be multiple actions which maximize Q^*(s,a), in which case, all of them are optimal, 
+and the optimal policy may randomly select any of them. 
+But there is always an optimal policy which deterministically selects an action.
+
+
+## Bellman Equations
+All four of the value functions obey special self-consistency equations called Bellman equations. 
+The basic idea behind the Bellman equations is this:
+
+    The value of your starting point is the reward you expect to get from being there, plus the value of wherever you land next.
+
+The crucial difference between the Bellman equations for the on-policy value functions and the optimal value functions, 
+is the absence or presence of the \max over actions
+
+
+## Advantage functions
+Sometimes in RL, we don’t need to describe how good an action is in an absolute sense, 
+but only how much better it is than others on average. 
+That is to say, we want to know the relative advantage of that action. 
+We make this concept precise with the advantage function.
+
+The advantage function A^{\pi}(s,a) corresponding to a policy \pi 
+describes how much better it is to take a specific action a in state s, 
+over randomly selecting an action according to \pi(\cdot|s), 
+assuming you act according to \pi forever after. Mathematically, the advantage function is defined by
+
+
+## Formalism
+Markov Decision processes <S,A,R,P,\rho_0>
+1. S is the set of all valid states
+2. A is the set of all valid actions
+3. R : S x A x S --> R is the reward function, with r_t = R(s_t,a_t, s_(t+1))
+4. P : S x A --> P(s) is the transition probability function, with P(s'|s,a) being the probability of transitioning 
+   into state s' if you start in state s and take action a
+5 . \rho_0 is the starting state distribution
