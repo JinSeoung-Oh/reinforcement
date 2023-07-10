@@ -1,0 +1,30 @@
+********************************************************************
+*On-policy reinforcement learning                                  *
+********************************************************************
+*Advantages********************************************************* 
+*          * 1. Learns safer strategy                              *
+*          * 2. Often converges faster                             *
+*          * 3. often has better online performance                *
+********************************************************************
+*Disadvantages******************************************************
+*             * 1. May become trapped in local minima              *
+*             * 2. Less likeyly to find optimal policy             *
+*             * 3. Data musy be collected following current policy *
+********************************************************************
+
+
+
+*********************************************************************
+*Off-policy reinforement learning                                   *
+*********************************************************************
+*Adantages***********************************************************
+*         * 1. More likely to find optimal policy                   *
+*         * 2. Less likely to get stuck in local minimum            *
+*         * 3. Can utilize experience replay                        *
+*         * 4. Data can be collected via various method             *
+*********************************************************************
+*Disadvantages*******************************************************
+*             * 1. Policy learned may not be as safe                *
+*             * 2. May not perform as well online                   *
+*********************************************************************
+https://github.com/JinSeoung-Oh/reinforcement/blob/main/Offline_rl/basic_offline_rl.txt
