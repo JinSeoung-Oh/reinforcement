@@ -1,1 +1,50 @@
+## RL Algorithms
+
+1. Model-Free RL
+  1) policy optimization (policy gradient, A2C / A3C, PPO, TRPO, DDPG, TD3, SAC)
+  2) Q-Learning (DQN, DDPG, TD3, SAC, C51, QR-DQN, HER)
+
+2. Model-Based RL
+   1) Learn the Model (World Models, I2A, MBMF, MBVE)
+   2) Given the Model (AlphaZero)
+
+## Model free RL
+
+1) Policy optimization
+
+Methods in this family represent a policy explicitly as \pi_{\theta}(a|s).
+They optimize the parameters \theta either directly by gradient ascent on the performance objective J(\pi_{\theta}), 
+or indirectly, by maximizing local approximations of J(\pi_{\theta}).
+
+This optimization is almost always performed on-policy, 
+which means that each update only uses data collected while acting according to the most recent version of the policy
+
+Policy optimization also usually involves learning an approximator V_{\phi}(s) for the on-policy value function V^{\pi}(s), 
+which gets used in figuring out how to update the policy.
+
+
+2) Q-Learning
+
+Methods in this family learn an approximator Q_{\theta}(s,a) for the optimal action-value function, 
+Q^*(s,a). Typically they use an objective function based on the Bellman equation. 
+This optimization is almost always performed off-policy, 
+which means that each update can use data collected at any point during training, 
+regardless of how the agent was choosing to explore the environment when the data was obtained.
+
+# Trad-offs between policy optimization and Q-learning
+policy optimization - directly optimize for the thing you want / stable and reliable
+Q-learning - only indirectly optimize for agent performance, 
+             by training Q_{\theta} to satisfy a self-consistency equation / less stable, substantially more sample efficiet when they work
+
+
+
+## Model based RL
+
+Unlike model-free RL, there aren’t a small number of easy-to-define clusters of methods for model-based RL:
+there are many orthogonal ways of using models. 
+We’ll give a few examples, but the list is far from exhaustive. In each case, the model may either be given or learned.
+
+see this link for more detail about model based RL : https://spinningup.openai.com/en/latest/spinningup/rl_intro2.html
+
+
 
