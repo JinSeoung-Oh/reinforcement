@@ -1,1 +1,13 @@
+## Deriving the Simplest Policy Gradient
+Given parameterized policy(\pi_{\theta}), the aim is maximizing the expected return J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{R(\tau)}.
+For the purposes of this derivation, take R(\tau) to give the finite-horizon undiscounted return, but the derivation for the infinite-horizon discounted return setting is almost identical.
+
+\theta_{k+1} = \theta_k + \alpha \left. \nabla_{\theta} J(\pi_{\theta}) \right|_{\theta_k}.
+
+The gradient of policy performance, \nabla_{\theta} J(\pi_{\theta}), is called the policy gradient, and algorithms that
+optimize the policy this way are called policy gradient algorithm.(Vanilla Policy Gradient & TRPO)
+
+To actuallu use this, need an experssion for the policy gradient which can numerically compute
+Step 1) Deriving the analytical gradient of policy performance, which turns out to have the form of an expected value
+Step 2) Froming a sample estimate of the expected value, which can be computed with dta from a finite number of agent-environment interaction steps
 
