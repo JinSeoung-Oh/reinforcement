@@ -11,3 +11,19 @@ To actuallu use this, need an experssion for the policy gradient which can numer
 Step 1) Deriving the analytical gradient of policy performance, which turns out to have the form of an expected value
 Step 2) Froming a sample estimate of the expected value, which can be computed with dta from a finite number of agent-environment interaction steps
 
+## Derivation for Basic policy Gradient
+See : https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html
+
+Probability of a Trajectory + The Log-Derivative Trick + Log-Probaility of a Trajectory + 
+Gradients of Environment Functions + Grad-Log-Prob of a Trajectory
+
+## Implementing the Simplest policy gradient
+1. Making the Policy Network
+   - Builds modules and functions for using a feedforward neural network
+   +) When we talk about a categorical distribution having 'logits', what we mean is that
+      the prb. for each outcome are given by the Softmax function of the logits
+2. Making the Loss function
+   - Builds a "loss" function for the policy gradient algorithm
+   - right data means a set of (state, action, weight) tuples collected while acting according to the current policy
+   +) loss for policy gradient vs loss for supervised learning
+      - 
