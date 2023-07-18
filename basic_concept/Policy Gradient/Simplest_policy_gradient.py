@@ -77,8 +77,9 @@ def train(env_name='CartPole-v0', hidden_sizes=[32], lr=le-2, epoches=50, batch_
         ep_ret, ep_len = sum(ep_rews), len(ep_rews)
         batch_rects.append(ep_ret)
         batch_lens.append(ep_len)
+        ###################################
         batch_weights += [ep_ret] * ep_len
-
+        ###################################
         #reset episode-specific variables
         obs, done, ep_rews = env.reset(), False, []
         finished_rendering_this_epoch = True
