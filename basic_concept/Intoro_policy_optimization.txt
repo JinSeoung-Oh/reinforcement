@@ -26,4 +26,9 @@ Gradients of Environment Functions + Grad-Log-Prob of a Trajectory
    - Builds a "loss" function for the policy gradient algorithm
    - right data means a set of (state, action, weight) tuples collected while acting according to the current policy
    +) loss for policy gradient vs loss for supervised learning
-      - 
+      - The data distribution depends on the parameters
+        A loss function is usually defined on a fixed data distribution which is independent of the parameters we aim to optimize
+        vs
+        The data must be sampled on the most recent policy
+      - It doesn't measuer performance
+         
