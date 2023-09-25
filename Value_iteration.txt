@@ -1,0 +1,2 @@
+# Value_iteration(VI) is an algorithm used to solve RL problems, where we have full knowledge of all components of the MDP(Markov Decision Process)
+It works by iteratively improving its estimate of the 'value' of being in each state. 
