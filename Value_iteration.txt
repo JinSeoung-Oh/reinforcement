@@ -1,2 +1,27 @@
 # Value_iteration(VI) is an algorithm used to solve RL problems, where we have full knowledge of all components of the MDP(Markov Decision Process)
 It works by iteratively improving its estimate of the 'value' of being in each state. 
+It dose this by considering the immediate rewards and expected future rewards when taking different available actions. These values are tracked using a value table, which updates at each step.
+Eventually, this sequence of improvements converges, yielding an optimal policy of state --> action mappings that the agent can follow to mak the best decisions in the given enviornment.
+
+Vi leverages the concept of dynamic programming, where solving a big problem is broken down into smaller subproblems. The Bellman equation is used to guide the process of iteratively updating value estimates for each state,
+providing a recursive relationship that expresses the value of a state in terms of the values of its neifhbouring states
+
+# How does the value iteration algorithm work
+see : https://towardsdatascience.com/reinforcement-learning-an-easy-introduction-to-value-iteration-e4cfe0731fd5
+
+(1) Initialisation : After defining the parameters, we will initialise value function v(s) for all states in S. This typically means we set all values to 0 (or arbitrary constant) for every state.
+(2) Outer loop : At each pass of the outer loop, begin by setting delth = 0. Delta is used to represent the change in value estimates across all states, and the algorithm continues iterating unitll this change delth falls below the specified threshold
+(3) Inner loop : For every state in s In S
+                 -1. set a variable v to the current value of that state V(s)
+                 -2. perfom the bellman equation to update V(s)
+                 -3. update delth
+(4) Policy extraction : After performing multiple passes through the outer loop until it converged, we can extract a policy
+                        The policy is essentially a mapping from state -> actions, and for each state, it selects the action that maximized the expected return
+
+** Policy iteration is another dynamic programming algorithm. It is similar to VI except it alternates between improving the policy by making it greedy with repect to the current value function and evaluating the policy's performance until
+convergence, often requiring fewer iterations but more computation per iteration
+
+# Limitation
+1. It assumes that we have complete knowledge of the dynamics of the MDP
+   -Q-learning(model-free RL) is solusion of this problem
+2. As the number of states and actions increases, the size of the value table grows exponentially
